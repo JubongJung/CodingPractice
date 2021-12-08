@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class HashPractice {
     //    완주하지 못한 선수
@@ -34,20 +34,40 @@ public class HashPractice {
 //    https://programmers.co.kr/learn/courses/30/lessons/42577
     public boolean Question2(String[] phone_book) {
         boolean answer = true;
-
-        loop:
-        for (int i = 0; i < phone_book.length; i++) {
-            for (int j = 0; j < phone_book.length; j++) {
-                if(i == j) continue;
-
-                if (phone_book[i].length() <= phone_book[j].length() &&
-                        phone_book[i].equals(phone_book[j].substring(0,phone_book[i].length()))) {
-                    answer = false;
-                    break loop;
-                }
+        Arrays.sort(phone_book);
+        boolean result = true;
+        for (int i=0; i<phone_book.length-1; i++) {
+            if (phone_book[i+1].contains(phone_book[i])) {
+                result = false;
+                break;
             }
         }
 
         return answer;
     }
+
+//    위장
+//    https://programmers.co.kr/learn/courses/30/lessons/42578
+    public int Question3(String[][] clothes) {
+        int answer = 1;
+
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (String[] s : clothes) {
+            if (!hashMap.containsKey(s[1])) {
+                hashMap.put(s[1], 1);
+            } else {
+                hashMap.put(s[1], hashMap.get(s[1]) + 1);
+            }
+        }
+
+        String[] keys = hashMap.keySet().toArray(new String[hashMap.size()]);
+
+        for (int i = 0; i < keys.length; i++) {
+            answer = answer * (hashMap.get(keys[i]) + 1);
+        }
+
+        return answer - 1;
+    }
 }
+
+

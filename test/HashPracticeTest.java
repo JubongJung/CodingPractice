@@ -40,4 +40,13 @@ class HashPracticeTest {
         assertEquals(true , hashPractice.Question2(phonebook2));
         assertEquals(false, hashPractice.Question2(phonebook3));
     }
+
+    @Test
+    void 위장() {
+        String[][] clothe1 = {{"yellowhat", "headgear"}, {"bluesunglasses", "eyewear"}, {"green_turban", "headgear"}};
+        String[][] clothe2 = {{"crowmask", "face"}, {"bluesunglasses", "face"}, {"smoky_makeup", "face"}};
+
+        assertEquals(5, hashPractice.Question3(clothe1));
+        assertEquals(3, hashPractice.Question3(clothe2));
+    }
 }
