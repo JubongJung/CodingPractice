@@ -1,4 +1,8 @@
+import javax.swing.text.html.parser.Entity;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.Map.Entry;
+
 
 public class HashPractice {
     //    완주하지 못한 선수
@@ -67,6 +71,59 @@ public class HashPractice {
         }
 
         return answer - 1;
+    }
+
+    //    베스트앨범
+    //    https://programmers.co.kr/learn/courses/30/lessons/42579
+    public int[] Question4(String[] genres, int[] plays) {
+        int[] answer = {};
+
+        HashMap<String, HashMap<Integer, Integer>> allSongs = new HashMap<>();
+        HashMap<String, Integer> genreStat = new HashMap<>();
+
+        for (int i = 0; i < genres.length; i++) {
+            if(allSongs.containsKey(genres[i])){
+                allSongs.get(genres[i]).put(i, plays[i]);
+            }else{
+                HashMap<Integer, Integer> tmpHashMap = new HashMap<>();
+                tmpHashMap.put(i, plays[i]);
+                allSongs.put(genres[i], tmpHashMap);
+            }
+
+            if (genreStat.containsKey(genres[i])) {
+                genreStat.put(genres[i], genreStat.get(genres[i]) + plays[i]);
+
+            }else{
+                genreStat.put(genres[i], plays[i]);
+            }
+        }
+
+        List<Map.Entry<String, Integer>> genreRank = new LinkedList<>(genreStat.entrySet());
+        genreRank.sort(Map.Entry.comparingByValue((x,y)->y - x));
+
+        System.out.println(allSongs);
+        System.out.println(genreRank.get(0));
+
+
+        int allCount = 0;
+        List<Integer> returnList = new ArrayList<>();
+        for (int i = 0; i < genreRank.size(); i++) {
+            String genre = genreRank.get(i).getKey();
+
+            List<Map.Entry<Integer, Integer>> genreSongs = new LinkedList<>(allSongs.get(genre).entrySet());
+            genreSongs.sort(Map.Entry.comparingByValue((x,y)->y - x));
+
+            for(int j = 0; j < 2 && j < genreSongs.size() && allCount < 5; j++) {
+                returnList.add(genreSongs.get(j).getKey());
+                allCount += 1;
+            }
+
+            if(allCount == 4) break;
+        }
+
+        answer = returnList.stream().mapToInt(i -> i).toArray();
+
+        return answer;
     }
 }
 

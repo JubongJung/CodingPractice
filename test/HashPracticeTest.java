@@ -49,4 +49,13 @@ class HashPracticeTest {
         assertEquals(5, hashPractice.Question3(clothe1));
         assertEquals(3, hashPractice.Question3(clothe2));
     }
+
+    @Test
+    void 베스트앨범() {
+        String[] genres = {"classic", "pop", "classic", "classic", "pop"};
+        int[] plays = {500, 600, 150, 800, 2500};
+        int[] result = {4, 1, 3, 0};
+
+        assertEquals(result, hashPractice.Question4(genres, plays));
+    }
 }
