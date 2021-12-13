@@ -2,7 +2,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,6 +58,7 @@ class HashPracticeTest {
         int[] plays = {500, 600, 150, 800, 2500};
         int[] result = {4, 1, 3, 0};
 
-        assertEquals(result, hashPractice.Question4(genres, plays));
+
+        assertArrayEquals(result, hashPractice.Question4(genres, plays));
     }
 }
