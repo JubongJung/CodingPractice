@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class StackQuePractice {
 
@@ -66,13 +64,62 @@ public class StackQuePractice {
 
         return answer;
     }
-    
+
+    class Q2Model {
+        int loc;
+        int pri;
+
+        public int getLoc() {
+            return loc;
+        }
+
+        public void setLoc(int loc) {
+            this.loc = loc;
+        }
+
+        public int getPri() {
+            return pri;
+        }
+
+        public void setPri(int pri) {
+            this.pri = pri;
+        }
+    }
+
     // https://programmers.co.kr/learn/courses/30/lessons/42587
     // 프린터
     public int Question2(int[] priorities, int location) {
         int answer = 0;
 
+        Queue<Q2Model> queue = new LinkedList<>();
 
+        for (int i = 0; i < priorities.length; i++) {
+            Q2Model q2Model = new Q2Model();
+            q2Model.setLoc(i);
+            q2Model.setPri(priorities[i]);
+            queue.add(q2Model);
+        }
+
+        loop:
+        while (queue.size() >= 1) {
+            Q2Model poll = queue.poll();
+
+            int queueSize = queue.size();
+
+            for (Q2Model q2Model : queue) {
+                if (poll.getPri() < q2Model.getPri()) {
+                    queue.add(poll);
+                    break;
+                }
+            }
+
+            if (queueSize == queue.size()) {
+                answer += 1;
+                if (poll.getLoc() == location) {
+                    break loop;
+                }
+            }
+        }
 
         return answer;
     }
