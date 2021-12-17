@@ -34,4 +34,35 @@ public class StackQuePracticeTest {
         Assertions.assertEquals(returnVal1, stackQuePractice.Question2(priorities1, location1));
         Assertions.assertEquals(returnVal2, stackQuePractice.Question2(priorities2, location2));
     }
+
+    @Test
+    void 다리를_지나는_트럭() {
+        int bridge_length1 = 2;
+        int bridge_length2 = 100;
+        int bridge_length3 = 100;
+
+        int weight1 = 10;
+        int weight2 = 100;
+        int weight3 = 100;
+
+        int[] truck_weights1 = {7,4,5,6};
+        int[] truck_weights2 = {10};
+        int[] truck_weights3 = {10,10,10,10,10,10,10,10,10,10};
+
+        int return1 = 8;
+        int return2 = 101;
+        int return3 = 110;
+
+        Assertions.assertEquals(return1, stackQuePractice.Question3(bridge_length1, weight1, truck_weights1));
+        Assertions.assertEquals(return2, stackQuePractice.Question3(bridge_length2, weight2, truck_weights2));
+        Assertions.assertEquals(return3, stackQuePractice.Question3(bridge_length3, weight3, truck_weights3));
+    }
+
+    @Test
+    void 주식가격() {
+        int[] prices = {1, 2, 3, 2, 3};
+        int[] result = {4, 3, 1, 1, 0};
+
+        Assertions.assertArrayEquals(result, stackQuePractice.Question4(prices));
+    }
 }
